@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Known:</b>
+  <%= @card.known %>
+</p>
+
+<p>
+  <b>Frontpage text:</b>
+  <%= @card.frontpage_text %>
+</p>
+
+<p>
+  <b>Frontpage image:</b>
+  <%= @card.frontpage_image %>
+</p>
+
+<p>
+  <b>Backpage text:</b>
+  <%= @card.backpage_text %>
+</p>
+
+<p>
+  <b>Backpage image:</b>
+  <%= @card.backpage_image %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @card.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

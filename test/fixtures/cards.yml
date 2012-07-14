@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  known: false
+  frontpage_text: MyText
+  frontpage_image: 
+  backpage_text: MyText
+  backpage_image: 
+  category: MyString
+
+two:
+  known: false
+  frontpage_text: MyText
+  frontpage_image: 
+  backpage_text: MyText
+  backpage_image: 
+  category: MyString
