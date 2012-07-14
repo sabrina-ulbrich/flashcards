@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Answer:  Category<%= @card.category %></h1>
+<h1>Answer </h1>
+<h2>Category <%= @card.category %></h2>
 
 <p>
   <%= @card.backpage_image.to_s.empty? ?  @card.backpage_text :  @card.backpage_image %>
@@ -21,8 +22,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :known %><br />
     <%= f.check_box :known %>
+    <%= f.label :known %>
   </div>
 
   </div>
@@ -31,6 +32,10 @@
   </div>
 <% end %>
 
+<p>
 <%=  link_to 'Next question', question_card_path(@nextCard) unless @nextCard.nil? %>
-<%= link_to 'Edit', edit_card_path(@card) %> |
+</p>
+<p>
+<%= link_to 'Edit', edit_card_path(@card) %> <br>
 <%= link_to 'Back', cards_path %>
+</p>
