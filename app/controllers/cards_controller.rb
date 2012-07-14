@@ -80,4 +80,36 @@ class CardsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  #Study mode: Show only front page with question
+  def study_question
+    @card = Card.find(params[:id])
+
+    respond_to do |format|
+      format.html # study_question.html.erb
+      format.json { render :json => @card }
+    end
+  end
+  
+  #Study mode: Show only front page with question
+  def study_answer
+    @card = Card.find(params[:id])
+    @nextCard = getNextCard(@card)
+ 
+    respond_to do |format|
+      format.html # study_answer.html.erb
+      format.json { render :json => @card }
+    end
+  
+  end
+  
+  def getNextCard(currentCard)
+    lastCard = Card.last
+    lastId = Integer(lastCard.id)
+    nextId = Integer(currentCard.id) + 1
+    if lastId <= nextId
+      return nil
+    end
+    return Card.find(nextId)
+  end
 end

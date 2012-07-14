@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Study Question:</h1>
+
+<p>
+  <%= @card.frontpage_image.to_s.empty? ?  @card.frontpage_text :  @card.frontpage_image %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @card.category %>
+</p>
+
+<%= link_to 'Answer', answer_card_path(@card) %>
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>
