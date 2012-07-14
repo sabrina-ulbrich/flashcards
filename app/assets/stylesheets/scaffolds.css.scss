@@ -29,6 +29,19 @@ a {
 div {
   &.field, &.actions {
     margin-bottom: 10px; } }
+    
+#card {
+  background-color: #EEEEFF;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border: 1px;
+  border-style: solid;
+  border-color: #DDDDFF;
+}
 
 #notice {
   color: green; }

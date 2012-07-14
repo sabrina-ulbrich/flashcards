@@ -3,7 +3,7 @@
 <h1>Question</h1>
 <h2> Category:  <%= @card.category %> </h2>
 
-<p>
+<p id="card">
   <%= @card.frontpage_image.to_s.empty? ?  @card.frontpage_text :  @card.frontpage_image %>
 </p>
 
@@ -13,6 +13,6 @@
 </p>
 <p>
 <%= link_to 'Edit', edit_card_path(@card) %> <br>
-<%= link_to 'List of all cards', cards_path %>
+<%= link_to 'See all cards', cards_path %>
 </p>
 
