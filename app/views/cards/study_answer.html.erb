@@ -1,20 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Study Question:</h1>
+<h1>Answer:  Category<%= @card.category %></h1>
 
 <p>
   <%= @card.backpage_image.to_s.empty? ?  @card.backpage_text :  @card.backpage_image %>
 </p>
 
-<p>
-  <b>Category:</b>
-  <%= @card.category %>
-</p>
 
 <%= form_for(@card) do |f| %>
   <% if @card.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being marked as known:</h2>
 
       <ul>
       <% @card.errors.full_messages.each do |msg| %>
@@ -34,7 +30,6 @@
     <%= f.submit %>
   </div>
 <% end %>
-
 
 <%=  link_to 'Next question', question_card_path(@nextCard) unless @nextCard.nil? %>
 <%= link_to 'Edit', edit_card_path(@card) %> |

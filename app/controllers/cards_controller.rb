@@ -107,7 +107,7 @@ class CardsController < ApplicationController
     lastCard = Card.last
     lastId = Integer(lastCard.id)
     nextId = Integer(currentCard.id) + 1
-    if lastId <= nextId
+    if lastId < nextId
       return nil
     end
     return Card.find(nextId)
