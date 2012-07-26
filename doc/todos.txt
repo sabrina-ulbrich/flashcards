@@ -1,0 +1,5 @@
+Umleitung der Startseite auf die erste Karte
+Link zu "List Modus" in Einzelkarte
+Known-Button und Unknown-Button statt Häkchen und Update-Button
+Nach "Known"-Button nächste Frage anzeigen (anstelle von Update-Bestätigung, und anstelle von Next-Link)
+Image-Upload(Edit-Form) und Anzeige auf Question und Answer

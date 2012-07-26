@@ -1,7 +1,7 @@
 Flashcards::Application.routes.draw do
   resources :cards
   
-  root :to => 'cards#index'
+  root :to => 'cards#study_question#1'
   
   resources :cards do
       member do

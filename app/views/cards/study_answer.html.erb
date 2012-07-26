@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Answer </h1>
-<h2>Category <%= @card.category %></h2>
+<h2>Category: <%= @card.category %></h2>
 
 <p id="card">
   <%= @card.backpage_image.to_s.empty? ?  @card.backpage_text :  @card.backpage_image %>
@@ -33,7 +33,7 @@
 <% end %>
 
 <p>
-<%=  link_to 'Next question', question_card_path(@nextCard) unless @nextCard.nil? %>
+<%=  link_to 'Next question', study_question_card_path(@nextCard) unless @nextCard.nil? %>
 </p>
 <p>
 <%= link_to 'Edit', edit_card_path(@card) %> <br>
