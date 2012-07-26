@@ -1,13 +1,19 @@
 Flashcards::Application.routes.draw do
-  resources :cards
   
-  root :to => 'cards#study_question#1'
-  
+  # root :to => 'cards#index'
+
+  root :to => redirect {
+    card = Card.first
+    "/cards/#{card.id}/study_question"
+    # TODO figure out how to use url helpers here.
+    # study_answer_card_url(card)
+  }
+    
   resources :cards do
-      member do
-	    get :study_question #, :as => 'question'
-	    get :study_answer #, :as =>'answer'
-      end
+    member do
+      get :study_question #, :as => 'question'
+      get :study_answer #, :as =>'answer'
+    end
   end
   
   # The priority is based upon order of creation:
