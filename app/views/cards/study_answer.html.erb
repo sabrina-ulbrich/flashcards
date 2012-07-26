@@ -33,7 +33,7 @@
 <% end %>
 
 <p>
-<%=  link_to 'Next question', question_card_path(@nextCard) unless @nextCard.nil? %>
+<%=  link_to 'Next question', study_question_card_path(@nextCard) unless @nextCard.nil? %>
 </p>
 <p>
 <%= link_to 'Edit', edit_card_path(@card) %> <br>
