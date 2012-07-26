@@ -11,8 +11,10 @@ Flashcards::Application.routes.draw do
     
   resources :cards do
     member do
-      get :study_question #, :as => 'question'
-      get :study_answer #, :as =>'answer'
+      get :study_question 
+      get :study_answer
+      get :known
+      get :unknown
     end
   end
   

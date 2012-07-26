@@ -91,10 +91,31 @@ class CardsController < ApplicationController
     end
   end
   
+  #Study mode: Card was known
+  def known
+    id = params[:id]
+    @card = Card.find(id)
+    @card.known = true
+    @card.save
+    nextCard = getNextCard(@card)
+    redirect_path = nextCard.nil? ? "/cards" :"/cards/#{nextCard.id}/study_question"
+    redirect_to redirect_path
+  end
+  
+  #Study mode: Card was unknown
+  def unknown
+    @card = Card.find(params[:id])
+    @card.known = false
+    @card.save
+    nextCard = getNextCard(@card)
+    redirect_path = nextCard.nil? ? "/cards" :"/cards/#{nextCard.id}/study_question"
+    redirect_to redirect_path
+  end
+  
   #Study mode: Show only front page with question
   def study_answer
     @card = Card.find(params[:id])
-    @nextCard = getNextCard(@card)
+    
  
     respond_to do |format|
       format.html # study_answer.html.erb
