@@ -4,7 +4,7 @@
 <h2>Category: <%= @card.category %></h2>
 
 <p id="card">
-  <%= @card.backpage_image.to_s.empty? ?  @card.backpage_text :  @card.backpage_image %>
+  <%= @card.backpage_image.to_s.empty? ?  @card.backpage_text :  image_tag(@card.backpage_image, :width => 600) %>
 </p>
 
 <p>

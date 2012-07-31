@@ -4,7 +4,7 @@
 <h2> Category:  <%= @card.category %> </h2>
 
 <p id="card">
-  <%= @card.frontpage_image.to_s.empty? ?  @card.frontpage_text :  @card.frontpage_image %>
+  <%= @card.frontpage_image.to_s.empty? ?  @card.frontpage_text :  image_tag(@card.frontpage_image, :width => 600) %>
 </p>
 
 
