@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 Image-Upload(Edit-Form) und Anzeige auf Question und Answer
 Study-Link von der Listen-Anzeige
 
+=======
+>>>>>>> 29becef39910c4c19b600a82eddfacd3d51a5d73
 --
 Nice to haves:
 Known-Button: Buttons statt Links
@@ -9,3 +12,19 @@ Verschiedene Kartensets für verschiedene User (über Controller)
 "schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 getNextCard richtig schreiben und ins Model packen
 Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig) 
+
+
+Verschiedene Kartensets für verschiedene User (über Controller)
+-User-Model anlegen
+-Verknüpfung mit card (has_many/has_many)
+-Eigenschaft des Users: "Wissensstand" - was gewusst wurde (statt bei den Karten)
+-Card sets als Model und Verwaltungsmöglichkeit (neues Set, Karte zu Set zuordnen, Karte aus Set löschen, Karten in Set anzeigen, neue Karte in Set)
+-Login anlegen
+
+
+"Card set"-Model 
+-has many User (migration für tabelle anlegen)
+
+Cards model überarbeiten
+-Known-Feld raus (Controller-Logik muss angepasst werden, dass das Feld von User benutzt wird!!)
+-in_Set-Relation zu Card set (belongs_to) : foreign key in card anlegen!
