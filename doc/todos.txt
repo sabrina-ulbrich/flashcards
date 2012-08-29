@@ -11,15 +11,14 @@ Umleitung der Startseite auf die erste Karte mit URL-Helper
 Verschiedene Kartensets für verschiedene User (über Controller)
 "schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 getNextCard richtig schreiben und ins Model packen
-Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig) 
+Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
+Anzeigen, welche Karten gewusst/nicht gewusst wurden 
 
 
 Verschiedene Kartensets für verschiedene User (über Controller)
--User-Model anlegen
--Verknüpfung mit card (has_many/has_many)
--Eigenschaft des Users: "Wissensstand" - was gewusst wurde (statt bei den Karten)
--Card sets als Model und Verwaltungsmöglichkeit (neues Set, Karte zu Set zuordnen, Karte aus Set löschen, Karten in Set anzeigen, neue Karte in Set)
+-Card sets als Model und Verwaltungsmöglichkeit (alle Karten in Set anzeigen, Karte zu Set zuordnen, Karte aus Set löschen, neue Karte in Set)
 -Login anlegen
+<<<<<<< HEAD
 
 
 "Card set"-Model 
@@ -28,3 +27,5 @@ Verschiedene Kartensets für verschiedene User (über Controller)
 Cards model überarbeiten
 -Known-Feld raus (Controller-Logik muss angepasst werden, dass das Feld von User benutzt wird!!)
 -in_Set-Relation zu Card set (belongs_to) : foreign key in card anlegen!
+=======
+>>>>>>> a7b7cf954d1fb85e77ea62b9621c16117136358a

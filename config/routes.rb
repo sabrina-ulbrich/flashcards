@@ -1,5 +1,5 @@
 Flashcards::Application.routes.draw do
-  
+
   # root :to => 'cards#index'
 
   root :to => redirect {
@@ -13,10 +13,13 @@ Flashcards::Application.routes.draw do
     member do
       get :study_question 
       get :study_answer
-      get :known
-      get :unknown
     end
   end
+  
+  match "/cards/known/:card_id/:user_id" => "cards#known", :as => "known_card"
+   match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
+  resources :card_sets
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
