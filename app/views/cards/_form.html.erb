@@ -12,8 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :category %><br />
+    <%= f.label :category %>
     <%= f.text_field :category %>
+ 
+    <%= f.label :card_set%>
+    <%= f.select(:card_set,CardSet.all.collect {|c| [c.name, c.id ] }.map {|key, value| [key, value]}, {:selected => @card.card_set.id})%>
   </div>
   
   <div class="field">
@@ -29,12 +32,6 @@
     <%= f.file_field :frontpage_image %>
     <%= f.file_field :backpage_image %>
   </div>
-
-  <div class="field">
-    <%= f.label :known %><br />
-    <%= f.check_box :known %>
-  </div>
-  
   
   <div class="actions">
     <%= f.submit %>

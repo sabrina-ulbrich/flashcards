@@ -1,15 +1,39 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Id:</b>
-  <%= @card_set.id %>
+  <h1> Card set: <%= @card_set.name  %> (Id: <%= @card_set.id %>) </h1>
 </p>
 
-<p>
-  <b>Name:</b>
-  <%= @card_set.name %>
-</p>
+<table>
+  <tr>
+    <th>Known</th>
+    <th>Frontpage text</th>
+    <th>Frontpage image</th>
+    <th>Backpage text</th>
+    <th>Backpage image</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @card_set.cards.each do |card| %>
+  <tr>
+    <td><%= card.known %></td>
+    <td><%= card.frontpage_text %></td>
+    <td><%= card.frontpage_image %></td>
+    <td><%= card.backpage_text %></td>
+    <td><%= card.backpage_image %></td>
+    <td><%= card.category %></td>
+    <td><%= link_to 'Show', card %></td>
+    <td><%= link_to 'Edit', edit_card_path(card) %></td>
+    <td><%= link_to 'Destroy', card, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
 
 
-<%= link_to 'Edit', edit_card_set_path(@card_set) %> |
+<%= link_to 'Rename card set', edit_card_set_path(@card_set) %> |
+<%= link_to 'Add new card', new_card_in_set_path(@card_set) %>
 <%= link_to 'Back', card_sets_path %>
+

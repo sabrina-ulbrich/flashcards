@@ -6,9 +6,13 @@ Verschiedene Kartensets für verschiedene User (über Controller)
 "schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 getNextCard richtig schreiben und ins Model packen
 Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
+
 Anzeigen, welche Karten gewusst/nicht gewusst wurden 
 
 
 Verschiedene Kartensets für verschiedene User (über Controller)
 -Card sets als Model und Verwaltungsmöglichkeit (alle Karten in Set anzeigen, Karte zu Set zuordnen, Karte aus Set löschen, neue Karte in Set)
+-Set anzeigen in Card Index Übersicht 
 -Login anlegen
+
+Neue Karte in Set: bei new muss das Card-Set übergeben werden
