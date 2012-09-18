@@ -17,7 +17,8 @@ Flashcards::Application.routes.draw do
   end
   
   match "/cards/known/:card_id/:user_id" => "cards#known", :as => "known_card"
-   match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
+  match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
+  match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"
   resources :card_sets
 
   

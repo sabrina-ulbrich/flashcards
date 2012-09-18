@@ -25,6 +25,8 @@ class CardsController < ApplicationController
   # GET /cards/new.json
   def new
     @card = Card.new
+    card_set = CardSet.find(params[:card_set_id])
+      @card.card_set = card_set
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +42,10 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.json
   def create
-    @card = Card.new(params[:card])
+    param_card = params[:card]
+    card_set = CardSet.find(param_card[:card_set])
+    param_card[:card_set] = card_set
+    @card = Card.new(param_card)
 
     respond_to do |format|
       if @card.save
@@ -57,9 +62,12 @@ class CardsController < ApplicationController
   # PUT /cards/1.json
   def update
     @card = Card.find(params[:id])
+        param_card = params[:card]
+    card_set = CardSet.find(param_card[:card_set])
+    param_card[:card_set] = card_set
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.update_attributes(param_card)
         format.html { redirect_to @card, :notice => 'Card was successfully updated.' }
         format.json { head :no_content }
       else
