@@ -1,8 +1,8 @@
 Flashcards::Application.routes.draw do
 
-  # root :to => 'cards#index'
+  root :to => 'users#index'
 
-  root :to => redirect {
+   match "/cards/start_study" => redirect {
     card = Card.first
     "/cards/#{card.id}/study_question"
     # TODO figure out how to use url helpers here.
@@ -16,11 +16,23 @@ Flashcards::Application.routes.draw do
     end
   end
   
+  resources :card_sets
+  
   match "/cards/known/:card_id/:user_id" => "cards#known", :as => "known_card"
   match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
   match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"
-  resources :card_sets
+  
+  resources :users do
+    collection do
+      post :login
+    end
+  end
+ 
 
+  
+  
+  
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

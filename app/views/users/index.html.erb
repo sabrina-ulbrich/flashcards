@@ -1,0 +1,17 @@
+<h1>Login for Web Flashcards</h1>
+
+<%= form_for(@user, :url => login_users_path) do |f| %>
+
+<div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    
+        <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Let me in!" %>
+  </div>
+  
+<% end %>
