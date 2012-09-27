@@ -21,4 +21,4 @@ bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
 Neuer User anlegen (mit Link von Login-Seite
 login-berechtigung bei card_sets, show_cards usw. prüfen
 ausloggen
-Alle Sets des Users anzeigen (mit Neues Set, Set löschen, Set bearbeiten)	
+Alle Sets des Users anzeigen (mit Neues Set, Set löschen, Set bearbeiten)
