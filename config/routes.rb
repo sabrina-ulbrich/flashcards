@@ -9,18 +9,10 @@ Flashcards::Application.routes.draw do
     # study_answer_card_url(card)
   }
     
-  resources :cards do
-    member do
-      get :study_question 
-      get :study_answer
-    end
-  end
-  
-  resources :card_sets
-  
   match "/cards/known/:card_id/:user_id" => "cards#known", :as => "known_card"
   match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
   match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"
+  match "/card_sets/current_user" => "card_sets#currentuser", :as => "card_set_current"
   
   resources :users do
     collection do
@@ -28,6 +20,14 @@ Flashcards::Application.routes.draw do
     end
   end
  
+ resources :cards do
+    member do
+      get :study_question 
+      get :study_answer
+    end
+  end
+  
+  resources :card_sets
 
   
   

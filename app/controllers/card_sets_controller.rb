@@ -80,4 +80,16 @@ class CardSetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # GET /card_sets/by_user/1
+  # GET /card_sets/1.json
+  def currentuser
+    
+    @user = User.find(session[:user_id])
+
+    respond_to do |format|
+      format.html # showbyuser.html.erb
+      format.json { render :json => @card_sets }
+    end
+  end
 end

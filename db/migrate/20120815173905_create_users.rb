@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :id
       t.string :name
-      t.string :password
+      t.string:password
 
       t.timestamps
     end

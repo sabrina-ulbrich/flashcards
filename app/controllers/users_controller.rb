@@ -6,15 +6,15 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
- # GET /users/login
+ # POST /users/login
   def login
     user_data = params[:user]
     @user = User.where(:name => user_data[:name]).first
-    if(@user.check_password?(user_data[:password]))
-       redirect_to "/card_sets/" + @user.id.to_s
+    if @user && @user.authenticate(user_data[:password])
+      session[:user_id] = @user.id
+      redirect_to "/card_sets/current_user", :notice => "Logged in!"
     else
-      #redirect_to :back
+      flash.now.alert = "Invalid email or password"
     end
   end
-
 end

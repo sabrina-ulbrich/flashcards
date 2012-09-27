@@ -17,8 +17,8 @@ Verschiedene Kartensets für verschiedene User (über Controller)
 Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 
 User-Verwaltung
-nach erfolgreichem Einloggen müsste nicht CardSet 1 angezeigt werden, sondern das CardSet des Users 1
 bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
 Neuer User anlegen (mit Link von Login-Seite
+login-berechtigung bei card_sets, show_cards usw. prüfen
 ausloggen
 Alle Sets des Users anzeigen (mit Neues Set, Set löschen, Set bearbeiten)	
