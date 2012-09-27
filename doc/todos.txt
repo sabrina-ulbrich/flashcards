@@ -1,11 +1,7 @@
-Image-Upload(Edit-Form) und Anzeige auf Question und Answer
-Study-Link von der Listen-Anzeige
-
-=======
 --
 Nice to haves:
+Login: Übermittlung der Login-Daten per Post
 Known-Button: Buttons statt Links
-Umleitung der Startseite auf die erste Karte mit URL-Helper
 Verschiedene Kartensets für verschiedene User (über Controller)
 "schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 getNextCard richtig schreiben und ins Model packen
@@ -15,17 +11,14 @@ Anzeigen, welche Karten gewusst/nicht gewusst wurden
 
 
 Verschiedene Kartensets für verschiedene User (über Controller)
--Card sets als Model und Verwaltungsmöglichkeit (alle Karten in Set anzeigen, Karte zu Set zuordnen, Karte aus Set löschen, neue Karte in Set)
 -Set anzeigen in Card Index Übersicht 
 -Login anlegen
 
+Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 
-"Card set"-Model 
--has many User (migration für tabelle anlegen)
-
-Cards model überarbeiten
--Known-Feld raus (Controller-Logik muss angepasst werden, dass das Feld von User benutzt wird!!)
--in_Set-Relation zu Card set (belongs_to) : foreign key in card anlegen!
-=======
-
-Neue Karte in Set: bei new muss das Card-Set übergeben werden
+User-Verwaltung
+nach erfolgreichem Einloggen müsste nicht CardSet 1 angezeigt werden, sondern das CardSet des Users 1
+bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
+Neuer User anlegen (mit Link von Login-Seite
+ausloggen
+Alle Sets des Users anzeigen (mit Neues Set, Set löschen, Set bearbeiten)
