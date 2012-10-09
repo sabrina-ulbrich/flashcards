@@ -16,7 +16,7 @@
     <%= f.text_field :category %>
  
     <%= f.label :card_set%>
-    <%= f.select(:card_set,CardSet.all.collect {|c| [c.name, c.id ] }.map {|key, value| [key, value]}, {:selected => @card.card_set.id})%>
+    <%= f.select(:card_set,@user.card_sets.all.collect {|c| [c.name, c.id ] }.map {|key, value| [key, value]}, {:selected => @card.card_set.id})%>
   </div>
   
   <div class="field">

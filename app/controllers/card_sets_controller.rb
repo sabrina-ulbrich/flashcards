@@ -3,7 +3,7 @@ class CardSetsController < ApplicationController
   # GET /card_sets.json
   def index
     @card_sets = CardSet.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @card_sets }
@@ -14,11 +14,15 @@ class CardSetsController < ApplicationController
   # GET /card_sets/1.json
   def show
     @card_set = CardSet.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @card_set }
-    end
+    user = User.find(session[:user_id])
+    if(@card_set.users.include?(user))
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render :json => @card_set }
+      end
+    else
+      redirect_to card_set_current_url, :notice => 'You can only view your own card sets!'
+    end  
   end
 
   # GET /card_sets/new
@@ -41,6 +45,8 @@ class CardSetsController < ApplicationController
   # POST /card_sets.json
   def create
     @card_set = CardSet.new(params[:card_set])
+    user = User.find(session[:user_id])
+    @card_set.users << user
 
     respond_to do |format|
       if @card_set.save
@@ -57,13 +63,22 @@ class CardSetsController < ApplicationController
   # PUT /card_sets/1.json
   def update
     @card_set = CardSet.find(params[:id])
-
-    respond_to do |format|
-      if @card_set.update_attributes(params[:card_set])
-        format.html { redirect_to @card_set, :notice => 'Card set was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render :action => "edit" }
+    
+    user = User.find(session[:user_id])
+    
+    if(@card_set.users.include?(user))
+      respond_to do |format|
+        if @card_set.update_attributes(params[:card_set])
+          format.html { redirect_to @card_set, :notice => 'Card set was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render :action => "edit" }
+          format.json { render :json => @card_set.errors, :status => :unprocessable_entity }
+        end
+      end
+    else
+     respond_to do |format|
+        format.html { redirect_to card_set_current_url, :notice => 'You can only edit your own card sets!' }
         format.json { render :json => @card_set.errors, :status => :unprocessable_entity }
       end
     end
@@ -73,23 +88,26 @@ class CardSetsController < ApplicationController
   # DELETE /card_sets/1.json
   def destroy
     @card_set = CardSet.find(params[:id])
-    @card_set.destroy
+    user = User.find(session[:user_id])
+    if(@card_set.users.include?(user))
+      @card_set.destroy
+    end
 
     respond_to do |format|
-      format.html { redirect_to card_sets_url }
+      format.html { redirect_to card_set_current }
       format.json { head :no_content }
     end
   end
   
-  # GET /card_sets/by_user/1
-  # GET /card_sets/1.json
+  # GET /card_sets/current_user
   def currentuser
     
     @user = User.find(session[:user_id])
 
     respond_to do |format|
-      format.html # showbyuser.html.erb
+      format.html # currentuser.html.erb
       format.json { render :json => @card_sets }
     end
   end
+
 end

@@ -1,13 +1,15 @@
 --
 Nice to haves:
-Login: Übermittlung der Login-Daten per Post
 Known-Button: Buttons statt Links
-Verschiedene Kartensets für verschiedene User (über Controller)
 "schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 getNextCard richtig schreiben und ins Model packen
 Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
 
 Anzeigen, welche Karten gewusst/nicht gewusst wurden 
+
+Bei fehlenden Zugriffsrechten eine Fehlermeldung anzeigen statt kommentarlos auf die Startseite des Users umzuleiten	
+
+bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
 
 
 Verschiedene Kartensets für verschiedene User (über Controller)
@@ -17,8 +19,7 @@ Verschiedene Kartensets für verschiedene User (über Controller)
 Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 
 User-Verwaltung
-bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
-Neuer User anlegen (mit Link von Login-Seite
-login-berechtigung bei card_sets, show_cards usw. prüfen
+Neuer User anlegen (mit Link von Login-Seite)
 ausloggen
-Alle Sets des Users anzeigen (mit Neues Set, Set löschen, Set bearbeiten)
+bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
+

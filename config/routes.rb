@@ -9,8 +9,8 @@ Flashcards::Application.routes.draw do
     # study_answer_card_url(card)
   }
     
-  match "/cards/known/:card_id/:user_id" => "cards#known", :as => "known_card"
-  match "/cards/unknown/:card_id/:user_id" => "cards#unknown", :as => "unknown_card"
+  match "/cards/known/:card_id" => "cards#known", :as => "known_card"
+  match "/cards/unknown/:card_id" => "cards#unknown", :as => "unknown_card"
   match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"
   match "/card_sets/current_user" => "card_sets#currentuser", :as => "card_set_current"
   

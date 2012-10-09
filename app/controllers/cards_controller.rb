@@ -14,11 +14,19 @@ class CardsController < ApplicationController
   # GET /cards/1.json
   def show
     @card = Card.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @card }
+    
+    user_id = session[:user_id]
+    user = User.find(user_id)
+    if(@card.card_set.users.include?(user))
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render :json => @card }
+      end
+    else
+      redirect_to "/card_sets/current_user"
     end
+
+    
   end
 
   # GET /cards/new
@@ -26,7 +34,9 @@ class CardsController < ApplicationController
   def new
     @card = Card.new
     card_set = CardSet.find(params[:card_set_id])
-      @card.card_set = card_set
+    @card.card_set = card_set
+    user_id = session[:user_id]
+    @user = User.find(user_id) 
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +46,13 @@ class CardsController < ApplicationController
 
   # GET /cards/1/edit
   def edit
+    user_id = session[:user_id]
+    user = User.find(user_id)
+    
     @card = Card.find(params[:id])
+    if(!@card.card_set.users.include?(user))
+      redirect_to "/card_sets/current_user"
+    end
   end
 
   # POST /cards
@@ -46,15 +62,22 @@ class CardsController < ApplicationController
     card_set = CardSet.find(param_card[:card_set])
     param_card[:card_set] = card_set
     @card = Card.new(param_card)
+    
+    user_id = session[:user_id]
+    user = User.find(user_id)
 
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to @card, :notice => 'Card was successfully created.' }
-        format.json { render :json => @card, :status => :created, :location => @card }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @card.errors, :status => :unprocessable_entity }
+    if(@card.card_set.users.include?(user))
+      respond_to do |format|
+        if @card.save
+          format.html { redirect_to @card, :notice => 'Card was successfully created.' }
+          format.json { render :json => @card, :status => :created, :location => @card }
+        else
+          format.html { render :action => "new" }
+          format.json { render :json => @card.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to "/card_sets/current_user"
     end
   end
 
@@ -62,88 +85,113 @@ class CardsController < ApplicationController
   # PUT /cards/1.json
   def update
     @card = Card.find(params[:id])
-        param_card = params[:card]
+    param_card = params[:card]
     card_set = CardSet.find(param_card[:card_set])
     param_card[:card_set] = card_set
 
-    respond_to do |format|
-      if @card.update_attributes(param_card)
-        format.html { redirect_to @card, :notice => 'Card was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @card.errors, :status => :unprocessable_entity }
+    user_id = session[:user_id]
+    user = User.find(user_id)
+
+    if(@card.card_set.users.include?(user))
+      respond_to do |format|
+        if @card.update_attributes(param_card)
+          format.html { redirect_to @card, :notice => 'Card was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render :action => "edit" }
+          format.json { render :json => @card.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to "/card_sets/current_user"
     end
   end
 
   # DELETE /cards/1
   # DELETE /cards/1.json
   def destroy
+    user_id = session[:user_id]
+    user = User.find(user_id)
     @card = Card.find(params[:id])
-    @card.destroy
+    if(@card.card_set.users.include?(user))
+      @card.destroy
 
-    respond_to do |format|
-      format.html { redirect_to cards_url }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to cards_url }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to "/card_sets/current_user"
     end
   end
   
   #Study mode: Show only front page with question
   def study_question
+    user_id = session[:user_id]
+    user = User.find(user_id)
     @card = Card.find(params[:id])
-
-    respond_to do |format|
-      format.html # study_question.html.erb
-      format.json { render :json => @card }
+    if(@card.card_set.users.include?(user))
+      respond_to do |format|
+        format.html # study_question.html.erb
+        format.json { render :json => @card }
+      end
+    else
+      redirect_to "/card_sets/current_user"
     end
   end
   
-  #Study mode: Show only front page with question
+  #Study mode: Show only back page with answer
   def study_answer
+    user_id = session[:user_id]
+    user = User.find(user_id)
     @card = Card.find(params[:id])
+    if(@card.card_set.users.include?(user))
+      respond_to do |format|
+        format.html # study_answer.html.erb
+        format.json { render :json => @card }
+      end
+    else
+      redirect_to "/card_sets/current_user"
+    end
     
  
-    respond_to do |format|
-      format.html # study_answer.html.erb
-      format.json { render :json => @card }
-    end
+    
   
-  end
-  
-  def getNextCard(currentCard)
-    lastCard = Card.last
-    lastId = Integer(lastCard.id)
-    nextId = Integer(currentCard.id) + 1
-    if lastId < nextId
-      return nil
-    end
-    return Card.find(nextId)
   end
   
   #Study mode: Card was known
   def known
-    user_id = params[:user_id]
+    user_id = session[:user_id]
     card_id = params[:card_id]
     @user = User.find(user_id)
     @card = Card.find(card_id)
-    @user.known_cards << @card
-    @user.save
-    nextCard = getNextCard(@card)
-    redirect_path = nextCard.nil? ? "/cards" :"/cards/#{nextCard.id}/study_question"
+    if(@card.card_set.users.include?(@user))
+      @user.known_cards << @card
+      @user.save
+      nextCard = @card.card_set.getNextCard(@card)
+      card_set_id = @card.card_set.id
+      redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
+    else
+      redirect_path = "/card_sets/current_user"
+    end
     redirect_to redirect_path
   end
   
   #Study mode: Card was unknown
   def unknown
-    user_id = params[:user_id]
+    user_id = session[:user_id]
     card_id = params[:card_id]
     @user = User.find(user_id)
     @card = Card.find(card_id)
-    @user.unknown_cards << @card
-    @user.save
-    nextCard = getNextCard(@card)
-    redirect_path = nextCard.nil? ? "/cards" :"/cards/#{nextCard.id}/study_question"
+    if(@card.card_set.users.include?(@user))
+      @user.unknown_cards << @card
+      @user.save
+      nextCard = @card.card_set.getNextCard(@card)
+      card_set_id = @card.card_set.id
+      redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
+    else
+      redirect_path = "/card_sets/current_user"
+    end
     redirect_to redirect_path
   end
 end
