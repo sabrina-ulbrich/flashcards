@@ -25,7 +25,6 @@ class CardsController < ApplicationController
     else
       redirect_to "/card_sets/current_user"
     end
-
     
   end
 
@@ -47,10 +46,10 @@ class CardsController < ApplicationController
   # GET /cards/1/edit
   def edit
     user_id = session[:user_id]
-    user = User.find(user_id)
+    @user = User.find(user_id)
     
     @card = Card.find(params[:id])
-    if(!@card.card_set.users.include?(user))
+    if(!@card.card_set.users.include?(@user))
       redirect_to "/card_sets/current_user"
     end
   end

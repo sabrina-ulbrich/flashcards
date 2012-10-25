@@ -14,9 +14,12 @@ bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
 
 Verschiedene Kartensets für verschiedene User (über Controller)
 -Set anzeigen in Card Index Übersicht 
--Login anlegen
+
+bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
+
 
 Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
+
 
 User-Verwaltung
 Neuer User anlegen (mit Link von Login-Seite)
