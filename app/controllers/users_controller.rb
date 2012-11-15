@@ -14,8 +14,14 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to "/card_sets/current_user", :notice => "Logged in!"
     else
-      flash.now.alert = "Invalid email or password"
+      redirect_to "/users", :alert => "Invalid email or password"
     end
+  end
+  
+   # POST /users/login
+  def logout
+    reset_session
+    redirect_to "/users"
   end
   
   # GET /cusers/new
@@ -28,13 +34,7 @@ class UsersController < ApplicationController
       format.json { render :json => @card }
     end
   end
-
-  # GET /users/1/edit
-  def edit
-    user_id = session[:user_id]
-    @user = User.find(user_id)
-  end
-
+  
   # POST /users
   # POST /user.json
   def create  
@@ -51,7 +51,28 @@ class UsersController < ApplicationController
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
-
   end
+
+  # GET /users/edit
+  def edit
+    user_id = session[:user_id]
+    @user = User.find(user_id)
+  end
+  
+  # PUT /users
+  def update
+    user_id = session[:user_id]
+    respond_to do |format|
+      @user = User.find(user_id)
+      if(@user.update_attributes(params[:user]))
+        format.html { redirect_to "/card_sets/current_user", :notice => 'Profile was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => "edit" }
+        format.json { render :json => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   
 end

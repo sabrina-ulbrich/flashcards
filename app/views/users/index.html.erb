@@ -1,5 +1,12 @@
 <h1>Login for Web Flashcards</h1>
 
+  <% if flash[:alert] %>
+    <p class="flash-error"><%= flash[:alert] %></p>
+  <% end %>
+  <% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+  <% end %>
+
 <%= form_for(@user, :url => login_users_path) do |f| %>
 
 <div class="field">

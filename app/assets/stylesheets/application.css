@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+.flash-error {
+    background-color: red;
+    color: white;
+}
+
+.flash-notice {
+    background-color: green;
+    color: white;
+}

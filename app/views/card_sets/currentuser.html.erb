@@ -1,4 +1,11 @@
-<h1>Listing card_sets</h1>
+<h1>Welcome <%= @user.name %>, here are your flash card sets:</h1>
+
+  <% if flash[:alert] %>
+    <p class="flash-error"><%= flash[:alert] %></p>
+  <% end %>
+  <% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+  <% end %>
 
 <table>
   <tr>

@@ -14,6 +14,9 @@ Flashcards::Application.routes.draw do
   match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"
   match "/card_sets/current_user" => "card_sets#currentuser", :as => "card_set_current"
   
+  match "users/logout" => "users#logout", :as => "logout"
+  match "users/edit" => "users#edit", :as => "edit"
+  
   resources :users do
     collection do
       post :login

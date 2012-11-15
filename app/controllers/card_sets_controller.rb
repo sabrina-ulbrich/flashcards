@@ -21,7 +21,7 @@ class CardSetsController < ApplicationController
         format.json { render :json => @card_set }
       end
     else
-      redirect_to card_set_current_url, :notice => 'You can only view your own card sets!'
+      redirect_to card_set_current_url, :alert => 'You can only view your own card sets!'
     end  
   end
 
@@ -78,7 +78,7 @@ class CardSetsController < ApplicationController
       end
     else
      respond_to do |format|
-        format.html { redirect_to card_set_current_url, :notice => 'You can only edit your own card sets!' }
+        format.html { redirect_to card_set_current_url, :alert => 'You can only edit your own card sets!' }
         format.json { render :json => @card_set.errors, :status => :unprocessable_entity }
       end
     end

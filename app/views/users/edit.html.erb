@@ -1,4 +1,11 @@
-<h1>Edit user for Web Flashcards</h1>
+<h1>Edit user for Web Flashcards</h1
+
+  <% if flash[:alert] %>
+    <p class="flash-error"><%= flash[:alert] %></p>
+  <% end %>
+  <% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+  <% end %>
 
 <%= form_for(@user, :html => {:multipart => true}) do |f| %>
 
@@ -11,7 +18,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Create User!" %>
+    <%= f.submit "Save User!" %>
   </div>
   
 <% end %>

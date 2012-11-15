@@ -120,7 +120,7 @@ class CardsController < ApplicationController
         format.json { head :no_content }
       end
     else
-      redirect_to "/card_sets/current_user"
+      redirect_to "/card_sets/current_user", :alert => "You may only delete your own cards!"
     end
   end
   
@@ -135,7 +135,7 @@ class CardsController < ApplicationController
         format.json { render :json => @card }
       end
     else
-      redirect_to "/card_sets/current_user"
+      redirect_to "/card_sets/current_user", :alert => "You may only view your own cards!"
     end
   end
   
@@ -150,7 +150,7 @@ class CardsController < ApplicationController
         format.json { render :json => @card }
       end
     else
-      redirect_to "/card_sets/current_user"
+      redirect_to "/card_sets/current_user", :alert => "You may only view your own cards!"
     end
     
  
@@ -171,7 +171,7 @@ class CardsController < ApplicationController
       card_set_id = @card.card_set.id
       redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
     else
-      redirect_path = "/card_sets/current_user"
+      redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
     redirect_to redirect_path
   end
@@ -189,9 +189,10 @@ class CardsController < ApplicationController
       card_set_id = @card.card_set.id
       redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
     else
-      redirect_path = "/card_sets/current_user"
+      redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
     redirect_to redirect_path
   end
+
 end
 

@@ -7,9 +7,13 @@ Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine 
 
 Anzeigen, welche Karten gewusst/nicht gewusst wurden 
 
-Bei fehlenden Zugriffsrechten eine Fehlermeldung anzeigen statt kommentarlos auf die Startseite des Users umzuleiten	
+Bei fehlenden Zugriffsrechten eine Fehlermeldung anzeigen statt kommentarlos auf die Startseite des Users umzuleiten
+->Startseite des Users	
 
 bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
+->login-Seite
+
+Edit, New von Users, Cards, Card-Sets
 
 
 Verschiedene Kartensets für verschiedene User (über Controller)
@@ -21,8 +25,10 @@ bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
 Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 
 
-User-Verwaltung
-Neuer User anlegen (mit Link von Login-Seite)
-ausloggen
-bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
+wenn man http://localhost:3000/card_sets/current_user aufruft, ohne eingeloggt zu sein, sollte nicht eine Exception fliegen, sondern auf die Login-Seite umgeleitet werden
 
+Es sollte nicht möglich sein, mehrere Benutzer mit dem gleichen Benutzernamen anzulegen
+
+Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren)
+
+-------------------------------
