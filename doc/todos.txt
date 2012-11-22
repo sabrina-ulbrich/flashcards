@@ -7,20 +7,10 @@ Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine 
 
 Anzeigen, welche Karten gewusst/nicht gewusst wurden 
 
-Bei fehlenden Zugriffsrechten eine Fehlermeldung anzeigen statt kommentarlos auf die Startseite des Users umzuleiten
-->Startseite des Users	
-
-bei nicht erfolgreichen Login sollte ein Fehler angezeigt werden
-->login-Seite
-
-Edit, New von Users, Cards, Card-Sets
-
-
 Verschiedene Kartensets für verschiedene User (über Controller)
 -Set anzeigen in Card Index Übersicht 
 
 bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
-
 
 Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 
@@ -31,4 +21,9 @@ Es sollte nicht möglich sein, mehrere Benutzer mit dem gleichen Benutzernamen a
 
 Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren)
 
+Im Lernmodus die Karten in zufälliger Reihenfolge anzeigen, inkl. der Startkarte
+
 -------------------------------
+
+Problem (mit Sven besprechen):
+http://localhost:3000/cards/start_study/5 - warum ist die ID nil?

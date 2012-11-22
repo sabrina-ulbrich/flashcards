@@ -1,14 +1,8 @@
 Flashcards::Application.routes.draw do
 
   root :to => 'users#index'
-
-   match "/cards/start_study" => redirect {
-    card = Card.first
-    "/cards/#{card.id}/study_question"
-    # TODO figure out how to use url helpers here.
-    # study_answer_card_url(card)
-  }
-    
+   
+  match "/cards/start_study/:card_set_id" => "cards#start_study", :as => "start_study"
   match "/cards/known/:card_id" => "cards#known", :as => "known_card"
   match "/cards/unknown/:card_id" => "cards#unknown", :as => "unknown_card"
   match "cards/new/:card_set_id" => "cards#new", :as => "new_card_in_set"

@@ -124,6 +124,14 @@ class CardsController < ApplicationController
     end
   end
   
+  #Study mode: Show first card for studying
+  def start_study
+    user_id = session[:user_id]
+    card = Card.find(:first, :conditions =>['cards_users.user_id = ? AND card_set_id = ? ', user_id, params[:card_set_id]], :include => [:users])
+    redirect_to "/cards/#{card.id}/study_question"
+  end
+  
+  
   #Study mode: Show only front page with question
   def study_question
     user_id = session[:user_id]
@@ -152,10 +160,6 @@ class CardsController < ApplicationController
     else
       redirect_to "/card_sets/current_user", :alert => "You may only view your own cards!"
     end
-    
- 
-    
-  
   end
   
   #Study mode: Card was known
@@ -166,14 +170,14 @@ class CardsController < ApplicationController
     @card = Card.find(card_id)
     if(@card.card_set.users.include?(@user))
       @user.known_cards << @card
+      @user.unknown_cards.delete(@card)
       @user.save
       nextCard = @card.card_set.getNextCard(@card)
       card_set_id = @card.card_set.id
-      redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
+      redirect_to nextCard.nil? ? "/card_sets/current_user" :"/cards/#{nextCard.id}/study_question"
     else
-      redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
+      redirect_to "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
-    redirect_to redirect_path
   end
   
   #Study mode: Card was unknown
@@ -184,14 +188,14 @@ class CardsController < ApplicationController
     @card = Card.find(card_id)
     if(@card.card_set.users.include?(@user))
       @user.unknown_cards << @card
+      @user.known_cards.delete(@card)
       @user.save
       nextCard = @card.card_set.getNextCard(@card)
       card_set_id = @card.card_set.id
-      redirect_path = nextCard.nil? ? "/card_sets/#{card_set_id}" :"/cards/#{nextCard.id}/study_question"
+      redirect_to redirect_path = nextCard.nil? ? "/card_sets/current_user" :"/cards/#{nextCard.id}/study_question"
     else
-      redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
+      redirect_to redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
-    redirect_to redirect_path
   end
 
 end

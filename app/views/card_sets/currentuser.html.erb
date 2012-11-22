@@ -11,15 +11,22 @@
   <tr>
     <th>Id</th>
     <th>Name</th>
+    <th>Known Cards</th>
+    <th>Unknown Cards</th>
+    <th>Total</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @user.card_sets.each do |card_set| %>
+<% @card_sets.each do |card_set| %>
   <tr>
     <td><%= card_set.id %></td>
     <td><%= card_set.name %></td>
+    <td><%= card_set.known %></td>
+    <td><%= card_set.unknown %></td>
+    <td><%= card_set.total %></td>
+    <td><%= link_to 'Start studying', start_study_path(card_set) %></td>
     <td><%= link_to 'Show', card_set %></td>
     <td><%= link_to 'Edit', edit_card_set_path(card_set) %></td>
     <td><%= link_to 'Destroy', card_set, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>

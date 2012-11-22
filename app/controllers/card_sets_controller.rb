@@ -101,8 +101,14 @@ class CardSetsController < ApplicationController
   
   # GET /card_sets/current_user
   def currentuser
+    @user =User.find(session[:user_id])
+    @card_sets = @user.card_sets
+    @card_sets.each {|card_set|
+      card_set.total = card_set.cards.size
+      card_set.known = card_set.cards.select {|card| @user.known_cards.include?(card)}.size
+      card_set.unknown = card_set.total - card_set.known
+    }
     
-    @user = User.find(session[:user_id])
 
     respond_to do |format|
       format.html # currentuser.html.erb
