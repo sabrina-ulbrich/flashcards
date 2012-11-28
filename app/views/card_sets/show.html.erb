@@ -13,11 +13,12 @@
     <th></th>
     <th></th>
     <th></th>
+
   </tr>
 
 <% @card_set.cards.each do |card| %>
   <tr>
-    <td><%= card.known %></td>
+    <td><%= card.card_set.users.find(@user.id).known_cards.include?(card) %></td>
     <td><%= card.frontpage_text %></td>
     <td><%= card.frontpage_image %></td>
     <td><%= card.backpage_text %></td>
@@ -30,8 +31,8 @@
 <% end %>
 </table>
 
-
+<%= link_to 'Start studying', start_study_path(@card_set) %> |
 <%= link_to 'Rename card set', edit_card_set_path(@card_set) %> |
-<%= link_to 'Add new card', new_card_in_set_path(@card_set) %>
+<%= link_to 'Add new card', new_card_in_set_path(@card_set) %> |
 <%= link_to 'Back', card_sets_path %>
 

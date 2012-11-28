@@ -14,8 +14,8 @@ class CardSetsController < ApplicationController
   # GET /card_sets/1.json
   def show
     @card_set = CardSet.find(params[:id])
-    user = User.find(session[:user_id])
-    if(@card_set.users.include?(user))
+    @user = User.find(session[:user_id])
+    if(@card_set.users.include?(@user))
       respond_to do |format|
         format.html # show.html.erb
         format.json { render :json => @card_set }

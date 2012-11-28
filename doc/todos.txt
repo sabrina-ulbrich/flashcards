@@ -1,29 +1,39 @@
---
 Nice to haves:
-Known-Button: Buttons statt Links
-"schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
-getNextCard richtig schreiben und ins Model packen
-Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
 
-Anzeigen, welche Karten gewusst/nicht gewusst wurden 
-
-Verschiedene Kartensets für verschiedene User (über Controller)
--Set anzeigen in Card Index Übersicht 
-
-bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
-
-Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
-
+UI
+---
+Im Lernmodus die Karten in zufälliger Reihenfolge anzeigen, inkl. der Startkarte
 
 wenn man http://localhost:3000/card_sets/current_user aufruft, ohne eingeloggt zu sein, sollte nicht eine Exception fliegen, sondern auf die Login-Seite umgeleitet werden
 
 Es sollte nicht möglich sein, mehrere Benutzer mit dem gleichen Benutzernamen anzulegen
+bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
 
 Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren)
+- Set und Benutzer anzeigen in Card Index Übersicht (und diese Seite nur für Admins zugängig machen)
 
-Im Lernmodus die Karten in zufälliger Reihenfolge anzeigen, inkl. der Startkarte
+Known-Button: Buttons statt Links
 
--------------------------------
+"schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
 
-Problem (mit Sven besprechen):
-http://localhost:3000/cards/start_study/5 - warum ist die ID nil?
+Technik
+---------
+getNextCard richtig schreiben und ins Model packen
+Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
+
+Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
+
+
+Refactoring / Rewrite-Ideen von Sven:
+-----------
+
+- Zuerst Models entwerfen:
+Das meint erstmal mit Stift und Papier überlegen, wie die Form und die gegenseitigen Abhängigkeiten aussehen sollen, dabei so einfach wie möglich bleiben. Also die reine Logik der Relationen zwischen Karten, Karten-Sets und Usern, z.B.: sind diese zwei has-and-belongs-to-many-Relationen wirklich notwendig? Oder könnte es eher eine has_many :through Relation sein?
+- Tests schreiben:
+Die Funktionalität wird geprüft und das Schreiben der Tests sollte auch mehr Klarheit verschaffen, welches Model welche Aufgaben hat. Dann zuerst nur die Models implementieren
+- REST beachten:
+Wenn die ganze Logik im Model statt im Controller ist, dann ist letzterer wesentlich schlanker (und sollte auch besser zu verstehen sein).
+- Guides lesen:
+association - welche Relation ist wofür angemessen? z.B.: http://guides.rubyonrails.org/association_basics.html
+resources - routes.rb besser gestalten, z.B.: http://guides.rubyonrails.org/routing.html
+

@@ -64,6 +64,7 @@ class CardsController < ApplicationController
     
     user_id = session[:user_id]
     user = User.find(user_id)
+    
 
     if(@card.card_set.users.include?(user))
       respond_to do |format|
@@ -127,8 +128,14 @@ class CardsController < ApplicationController
   #Study mode: Show first card for studying
   def start_study
     user_id = session[:user_id]
-    card = Card.find(:first, :conditions =>['cards_users.user_id = ? AND card_set_id = ? ', user_id, params[:card_set_id]], :include => [:users])
-    redirect_to "/cards/#{card.id}/study_question"
+    user = User.find(user_id)
+    card_set = CardSet.find(params[:card_set_id])
+    if(card_set.users.include?(user))
+      card = Card.find(:first, :conditions =>['card_set_id = ?', params[:card_set_id]])
+      redirect_to "/cards/#{card.id}/study_question"
+    else
+      redirect_to "/card_sets/current_user", :alert => "You may only view your own cards!"
+    end
   end
   
   
@@ -164,13 +171,11 @@ class CardsController < ApplicationController
   
   #Study mode: Card was known
   def known
-    user_id = session[:user_id]
-    card_id = params[:card_id]
-    @user = User.find(user_id)
-    @card = Card.find(card_id)
+    @user = User.find(session[:user_id])
+    logger.fatal("User id" + session[:user_id].to_s )
+    @card = Card.find(params[:card_id])
     if(@card.card_set.users.include?(@user))
       @user.known_cards << @card
-      @user.unknown_cards.delete(@card)
       @user.save
       nextCard = @card.card_set.getNextCard(@card)
       card_set_id = @card.card_set.id
@@ -187,7 +192,6 @@ class CardsController < ApplicationController
     @user = User.find(user_id)
     @card = Card.find(card_id)
     if(@card.card_set.users.include?(@user))
-      @user.unknown_cards << @card
       @user.known_cards.delete(@card)
       @user.save
       nextCard = @card.card_set.getNextCard(@card)
