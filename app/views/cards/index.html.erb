@@ -9,7 +9,8 @@
 
 <table>
   <tr>
-    <th>Known</th>
+    <th>Users</th>
+    <th>Card Set</th>
     <th>Frontpage text</th>
     <th>Frontpage image</th>
     <th>Backpage text</th>
@@ -22,7 +23,8 @@
 
 <% @cards.each do |card| %>
   <tr>
-    <td><%= card.known %></td>
+    <td><%= card.card_set.users.collect{|user| user.name}.join(", ")  unless card.card_set.nil? %></td>
+    <td><%= card.card_set.id  unless card.card_set.nil? %></td>
     <td><%= card.frontpage_text %></td>
     <td><%= card.frontpage_image %></td>
     <td><%= card.backpage_text %></td>

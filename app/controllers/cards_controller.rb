@@ -131,8 +131,12 @@ class CardsController < ApplicationController
     user = User.find(user_id)
     card_set = CardSet.find(params[:card_set_id])
     if(card_set.users.include?(user))
-      card = Card.find(:first, :conditions =>['card_set_id = ?', params[:card_set_id]])
-      redirect_to "/cards/#{card.id}/study_question"
+      cards = Card.find(:all, :conditions =>['card_set_id = ?', params[:card_set_id]])
+      card_ids = cards.collect{|card| card.id}
+      cards_to_study = card_ids.sort_by{rand}
+      card_id = cards_to_study.pop
+      session[:cards_to_study] = cards_to_study
+      redirect_to "/cards/#{card_id}/study_question"
     else
       redirect_to "/card_sets/current_user", :alert => "You may only view your own cards!"
     end
@@ -177,9 +181,9 @@ class CardsController < ApplicationController
     if(@card.card_set.users.include?(@user))
       @user.known_cards << @card
       @user.save
-      nextCard = @card.card_set.getNextCard(@card)
+      next_card_id = get_next_card_to_study
       card_set_id = @card.card_set.id
-      redirect_to nextCard.nil? ? "/card_sets/current_user" :"/cards/#{nextCard.id}/study_question"
+      redirect_to next_card_id.nil? ? "/card_sets/current_user" :"/cards/#{next_card_id}/study_question"
     else
       redirect_to "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
@@ -194,13 +198,16 @@ class CardsController < ApplicationController
     if(@card.card_set.users.include?(@user))
       @user.known_cards.delete(@card)
       @user.save
-      nextCard = @card.card_set.getNextCard(@card)
+      next_card_id = get_next_card_to_study
       card_set_id = @card.card_set.id
-      redirect_to redirect_path = nextCard.nil? ? "/card_sets/current_user" :"/cards/#{nextCard.id}/study_question"
+      redirect_to redirect_path = next_card_id.nil? ? "/card_sets/current_user" :"/cards/#{next_card_id}/study_question"
     else
       redirect_to redirect_path = "/card_sets/current_user", :alert => "You may only mark your own cards!"
     end
   end
-
+  
+  def get_next_card_to_study
+    next_index = session[:cards_to_study].pop
+  end
 end
 

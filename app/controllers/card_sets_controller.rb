@@ -101,18 +101,20 @@ class CardSetsController < ApplicationController
   
   # GET /card_sets/current_user
   def currentuser
-    @user =User.find(session[:user_id])
-    @card_sets = @user.card_sets
-    @card_sets.each {|card_set|
-      card_set.total = card_set.cards.size
-      card_set.known = card_set.cards.select {|card| @user.known_cards.include?(card)}.size
-      card_set.unknown = card_set.total - card_set.known
-    }
-    
-
-    respond_to do |format|
-      format.html # currentuser.html.erb
-      format.json { render :json => @card_sets }
+    if(session[:user_id]) 
+      @user =User.find(session[:user_id])
+      @card_sets = @user.card_sets
+      @card_sets.each {|card_set|
+        card_set.total = card_set.cards.size
+        card_set.known = card_set.cards.select {|card| @user.known_cards.include?(card)}.size
+        card_set.unknown = card_set.total - card_set.known
+      }
+      respond_to do |format|
+        format.html # currentuser.html.erb
+        format.json { render :json => @card_sets }
+      end
+    else
+      redirect_to users_url, :alert => 'Please log in first!'
     end
   end
 

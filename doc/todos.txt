@@ -2,26 +2,19 @@ Nice to haves:
 
 UI
 ---
-Im Lernmodus die Karten in zufälliger Reihenfolge anzeigen, inkl. der Startkarte
 
-wenn man http://localhost:3000/card_sets/current_user aufruft, ohne eingeloggt zu sein, sollte nicht eine Exception fliegen, sondern auf die Login-Seite umgeleitet werden
 
-Es sollte nicht möglich sein, mehrere Benutzer mit dem gleichen Benutzernamen anzulegen
-bei neuen Benutzer anlegen: Password-Überprüfung mit zweitem Validierungsfeld
+-Rolle: Admin einführen (Flag)
 
-Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren)
-- Set und Benutzer anzeigen in Card Index Übersicht (und diese Seite nur für Admins zugängig machen)
 
-Known-Button: Buttons statt Links
 
-"schöne" URLs - je wichtiger/häufiger benutzt, desto kürzer
+Design
+-------
+Farben und Layout überlegen
+Known-Button: Buttons statt Links - per CSS
+Anzeige einer aussagekräftigen Fehlermeldung wenn bereits existierender Benutzername erneut angelegt wird oder die Password-Validierung fehl schlägt
 
-Technik
----------
-getNextCard richtig schreiben und ins Model packen
-Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
-
-Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
+Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren) - Ausgangsbasis: http://localhost:3000/cards nur für Admins zugängig machen
 
 
 Refactoring / Rewrite-Ideen von Sven:
@@ -36,4 +29,10 @@ Wenn die ganze Logik im Model statt im Controller ist, dann ist letzterer wesent
 - Guides lesen:
 association - welche Relation ist wofür angemessen? z.B.: http://guides.rubyonrails.org/association_basics.html
 resources - routes.rb besser gestalten, z.B.: http://guides.rubyonrails.org/routing.html
+
+Refactoring - Technik
+---------
+Karte als known/unknown per URL-Parameter und POST übergeben (so dass nur eine Controller-Methode nötig)
+
+Neue Karte in Set anlegen/Karte bearbeiten: Die "schwarze Magie" und das Rumgehacke beim Anzeigen und Speichern der CardSet-Assoziation beenden	
 

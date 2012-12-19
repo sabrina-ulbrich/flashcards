@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users #needs to be to enable the relations "known" and "unknown" cards for users
   belongs_to :card_set
   mount_uploader :frontpage_image, PictureUploader
   mount_uploader :backpage_image, PictureUploader

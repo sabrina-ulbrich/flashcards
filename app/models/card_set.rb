@@ -5,14 +5,5 @@ class CardSet < ActiveRecord::Base
   
   attr_accessor :known, :unknown, :total
   
-   def getNextCard(currentCard)
-    cards = currentCard.card_set.cards
-    next_index = cards.index(currentCard) +1
-    if(next_index < cards.length)
-      cards[next_index]
-    else
-      nil
-    end
-  end
   
 end
