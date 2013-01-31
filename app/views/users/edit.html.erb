@@ -1,4 +1,4 @@
-<h1>Edit user for Web Flashcards</h1
+<h1>Edit user for Web Flashcards</h1>
 
   <% if flash[:alert] %>
     <p class="flash-error"><%= flash[:alert] %></p>
@@ -15,6 +15,18 @@
     <br>
     <%= f.label :password %>
     <%= f.password_field :password %>
+    
+    <% if @user.is_admin %>
+        <br>
+        <%= f.label :is_admin %>
+        <%= f.check_box :is_admin, :disabled => false %>
+    <% else %>
+        <br>
+        <%= f.label :is_admin %>
+        <%= f.check_box :is_admin, :disabled => true %>
+    <% end %>
+    
+
   </div>
 
   <div class="actions">

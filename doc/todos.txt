@@ -4,17 +4,17 @@ UI
 ---
 
 
--Rolle: Admin einführen (Flag)
+-der admin sollte nicht nur die eigenen Karten und Kartensets ansehen dürfen!
 
+Anzeige einer aussagekräftigen Fehlermeldung wenn bereits existierender Benutzername erneut angelegt wird oder die Password-Validierung fehl schlägt
 
 
 Design
 -------
+
+
 Farben und Layout überlegen
 Known-Button: Buttons statt Links - per CSS
-Anzeige einer aussagekräftigen Fehlermeldung wenn bereits existierender Benutzername erneut angelegt wird oder die Password-Validierung fehl schlägt
-
-Administrationspanel (Admin-Rolle mit Möglichkeit user, cardsets, cards beliebig zu editieren) - Ausgangsbasis: http://localhost:3000/cards nur für Admins zugängig machen
 
 
 Refactoring / Rewrite-Ideen von Sven:

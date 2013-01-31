@@ -10,13 +10,15 @@ Flashcards::Application.routes.draw do
   
   match "users/logout" => "users#logout", :as => "logout"
   match "users/edit" => "users#edit", :as => "edit"
+ 
   
   resources :users do
     collection do
-      post :login
+      get :login
+      post :login_submit
     end
   end
- 
+  
  resources :cards do
     member do
       get :study_question 

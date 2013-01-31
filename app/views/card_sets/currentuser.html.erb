@@ -6,6 +6,15 @@
   <% if flash[:notice] %>
     <p class="flash-notice"><%= flash[:notice] %></p>
   <% end %>
+  
+  <% if @user.is_admin %>
+  <h2>Admin Options</h2>
+  <ul>
+    <li><%= link_to 'Manage users', users_path %></li>
+    <li><%= link_to 'Manage card sets', card_sets_path %></li>
+    <li><%= link_to 'Manage cards', cards_path %></li>
+  </ul>
+<% end %>
 
 <table>
   <tr>

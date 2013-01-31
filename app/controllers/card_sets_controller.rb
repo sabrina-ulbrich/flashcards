@@ -2,11 +2,21 @@ class CardSetsController < ApplicationController
   # GET /card_sets
   # GET /card_sets.json
   def index
-    @card_sets = CardSet.all
+    user_id = session[:user_id]
+    if(user_id)
+      user = User.find(user_id)
+      if(user.is_admin)
+        @card_sets = CardSet.all
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @card_sets }
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render :json => @card_sets }
+        end
+      else
+          redirect_to "/card_sets/current_user"
+      end
+    else
+      redirect_to "/users/login"
     end
   end
 
