@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to "/card_sets/current_user", :notice => "Logged in!"
     else
-      redirect_to "/login", :alert => "Invalid email or password"
+      redirect_to "/users/login", :alert => "Invalid email or password"
     end
   end
   

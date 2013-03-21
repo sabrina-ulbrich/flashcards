@@ -25,7 +25,7 @@ class CardSetsController < ApplicationController
   def show
     @card_set = CardSet.find(params[:id])
     @user = User.find(session[:user_id])
-    if(@card_set.users.include?(@user))
+    if(@card_set.users.include?(@user) || @user.is_admin)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render :json => @card_set }
@@ -48,7 +48,14 @@ class CardSetsController < ApplicationController
 
   # GET /card_sets/1/edit
   def edit
+    user_id = session[:user_id]
+    @user = User.find(user_id)
+    
     @card_set = CardSet.find(params[:id])
+    if(!@card_set.users.include?(@user) && ! @user.is_admin)
+      redirect_to "/card_sets/current_user"
+    end
+    
   end
 
   # POST /card_sets
@@ -76,7 +83,7 @@ class CardSetsController < ApplicationController
     
     user = User.find(session[:user_id])
     
-    if(@card_set.users.include?(user))
+    if(@card_set.users.include?(user) || user.is_admin)
       respond_to do |format|
         if @card_set.update_attributes(params[:card_set])
           format.html { redirect_to @card_set, :notice => 'Card set was successfully updated.' }
@@ -99,12 +106,12 @@ class CardSetsController < ApplicationController
   def destroy
     @card_set = CardSet.find(params[:id])
     user = User.find(session[:user_id])
-    if(@card_set.users.include?(user))
+    if(@card_set.users.include?(user) || user.is_admin)
       @card_set.destroy
     end
 
     respond_to do |format|
-      format.html { redirect_to card_set_current }
+      format.html { redirect_to card_set_current_url }
       format.json { head :no_content }
     end
   end

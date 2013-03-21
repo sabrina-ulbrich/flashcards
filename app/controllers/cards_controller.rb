@@ -27,7 +27,7 @@ class CardsController < ApplicationController
     
     user_id = session[:user_id]
     user = User.find(user_id)
-    if(@card.card_set.users.include?(user))
+    if(@card.card_set.users.include?(user) || user.is_admin)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render :json => @card }
@@ -59,7 +59,7 @@ class CardsController < ApplicationController
     @user = User.find(user_id)
     
     @card = Card.find(params[:id])
-    if(!@card.card_set.users.include?(@user))
+    if(!@card.card_set.users.include?(@user) && ! @user.is_admin)
       redirect_to "/card_sets/current_user"
     end
   end
@@ -102,7 +102,7 @@ class CardsController < ApplicationController
     user_id = session[:user_id]
     user = User.find(user_id)
 
-    if(@card.card_set.users.include?(user))
+    if(@card.card_set.users.include?(user) || user.is_admin)
       respond_to do |format|
         if @card.update_attributes(param_card)
           format.html { redirect_to @card, :notice => 'Card was successfully updated.' }
@@ -123,7 +123,7 @@ class CardsController < ApplicationController
     user_id = session[:user_id]
     user = User.find(user_id)
     @card = Card.find(params[:id])
-    if(@card.card_set.users.include?(user))
+    if(@card.card_set.users.include?(user) || user.is_admin)
       @card.destroy
 
       respond_to do |format|
